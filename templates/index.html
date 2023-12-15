@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Speech To Text Using Google API and Keyboard Controller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta https-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="static/microphone.png"/>
+    <style>
+      html {
+        display: flex;
+      }
+      .container {
+        position: -webkit-sticky;
+        position:sticky;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 20px;
+        padding: 10px;
+      }
+      .container {
+        border: 2px solid black;
+        background: gray;
+        box-shadow: 4px 4px 10px black;
+        -webkit-box-flex: initial;
+      }
+      .bouncing-text {
+        margin-left: 180px;
+        position: relative;
+        display: flex;
+        font-size: 70px;
+        font-family: arial black;
+      }
+      .f {
+        margin-left: 30px;
+      }
+      .a,.b,.c,.d,.e{
+        color: #4cc9f0;
+        text-shadow: 0 3px #4361ee, 0 5px #4361ee, 0 7px #4361ee;
+      }
+      @keyframes bounce {
+        0%   { transform: scale(1,1) translateY(0); }
+        10%  { transform: scale(1.1,.9) translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-55px);}
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        58%  { transform: scale(1,1) translateY(-7px); }
+        65%  { transform: scale(1,1) translateY(0);}
+        100% { transform: scale(1,1) translateY(0);}
+      }
+
+      .a {
+        animation: bounce 1s ease infinite;
+      }
+
+      .b {
+        animation: bounce 1s ease infinite .1s;
+      }
+
+      .c {
+        animation: bounce 1s ease infinite .2s;
+      }
+
+      .d {
+        animation: bounce 1s ease infinite .3s;
+      }
+
+      .e {
+        animation: bounce 1s ease infinite .4s;
+      }
+      body {
+        overflow:auto;
+        position: auto;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+      }
+      body{
+          background: url('static/bgcolor.jpeg');
+          background-position: center center;
+          background-size: cover;
+          backgroun-repeat:no-repeat;
+       }
+       body {
+         background-color: rgba( 0, 0, 0, 0.1 );
+       }
+         .abstract img{
+         float: left;
+         height:400px;
+         width:400px;
+         position:relative;
+         margin-left: 300px;
+         margin-top:150px;
+         box-shadow:8px 8px 15px black;
+       }
+       .abstract h2 {
+         border: 0;
+         height: 360px;
+         width: 800px;
+         position:relative;
+         float:right;
+         margin-right:300px;;
+         margin-top:170px;
+         display:flex;
+         justify-content:left;
+         text-align: justify;
+         text-justify: inter-word;
+         font-family: courier;
+         font-size: 20px;
+       }
+       .introduction h2 {
+         float:left;
+         display:flex;
+         height:415px;
+         width:800px;
+         position: absolute;
+         margin-right:800px;
+         margin-top:839px;
+         margin-left:290px;
+         margin-left:
+         justify-content:left;
+         text-align: justify;
+         text-justify: inter-word;
+         font-family: courier;
+         font-size: 20px;
+         border:0;
+
+       }
+      .button {
+        margin-left: 95px;
+        margin-top: 650px;
+        position: absolute;
+        border: 0;
+        padding: 20px 90px;
+        border-radius: 50px;
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+        outline: 0;
+        background-image: linear-gradient(-180deg, #FF89D6 0%, #C01F9E 100%);
+        box-shadow: 0 1rem 1.25rem 0 rgba(22, 75, 195, 0.50), 0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset, 0 0.75rem 0.5rem rgba(255, 255, 255, 0.4) inset, 0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+      }
+      .introduction img {
+        position:relative;
+        width:400px;
+        height:400px;
+        float:right;
+        margin-right:300px;
+        margin-top:300px;
+        border:0;
+        box-shadow:-8px 8px 15px black;
+      }
+      footer {
+        margin-top:1400px;
+        font-size:25px;
+        position:auto;
+        position:relative;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/TweenMax.min.js"></script>
+  </head>
+  <body>
+  <center>
+    <header>
+    <div class="container">
+      <div class="bouncing-text">
+        <div class="a">A</div>
+        <div class="b">U</div>
+        <div class="c">D</div>
+        <div class="d">I</div>
+        <div class="e">O</div>
+        <div class="f"></div>
+        <div class="a">T</div>
+        <div class="b">O</div>
+        <div class="f"> </div>
+        <div class="c">T</div>
+        <div class="d">E</div>
+        <div class="e">X</div>
+        <div class="a">T</div>
+        <div class="b"></div>
+        <div class="f"> </div>
+        <div class="c">U</div>
+        <div class="d">S</div>
+        <div class="e">I</div>
+        <div class="a">N</div>
+        <div class="b">G</div>
+        <div class="f"> </div>
+        <div class="c">G</div>
+        <div class="d">O</div>
+        <div class="e">O</div>
+        <div class="a">G</div>
+        <div class="b">L</div>
+        <div class="c">E</div>
+        <div class="f"> </div>
+        <div class="d">A</div>
+        <div class="e">P</div>
+        <div class="a">I</div>
+      </div>
+    </div>
+    </header>
+  </center>
+    <div class="abstract">
+      <img src="static/voice.jpg"/>
+      <h2>
+        Abstract:
+        The Speech to Text project aims to create a system that can convert spoken words into written text and to develop a
+        reliable system for accurate transcription of spoken language into text, benefiting individuals with impairments and
+        enhancing communication across industries.. Here we are using the Google Cloud Speech Application Programming Interface (API),
+        this allows converting audio to text and we are integrating the application with notepad . We are using the pynput library to simulate keyboard inputs,
+        the speech recognition library to convert voice input into text, and the pywinauto library to interact with the Notepad application where
+        we can also save the recognized speech as a file in notepad. Several steps are performed internally by this API for converting
+        speech to text such as taking audio input, preprocessing, feature extraction, acoustic modelling, language modelling.</h2>
+    </div>
+    <form action="{{url_for('speech')}}" method="post">
+      <center>
+    <button class="button" name="button" value="button">
+      <span>Start</span>
+    </button>
+      </center>
+  </form>
+    <div class = "introduction">
+      <img src="static/text.jpg"/>
+      <h2>Introduction:
+        The proposed system implements a voice-controlled interface for interacting with the Notepad application. The goal of this project is to enable
+        users to control various functions of the Notepad application using voice commands, thereby providing a hands-free and intuitive method of interaction.
+        This technology allows for the conversion of spoken language into written text, providing a more accessible and efficient means of communication.
+        The development of speech recognition systems has been driven by the increasing demand for hands-free and intuitive interfaces for devices and applications.
+        These systems have a wide range of applications, including voice assistants, transcription services, call center automation, and language translation.
+        In this project, we will explore the development of a speech-to-text system using Google Cloud API integrated with notepad.
+        The goal of this project is to create a system that can accurately and reliably transcribe spoken language into text, providing a valuable tool for individuals,
+        as well as improving communication and productivity in various industries.
+      </h2>
+    </div>
+  <footer>
+      <center>
+	<p>&copy; Created in 2023</p>
+      </center>
+</footer>
+  </body>
+  <script type="text/javascript">
+        var $button = document.querySelector('.button');
+        $button.addEventListener('click', function() {
+        var duration = 0.3,delay = 0.05;
+        TweenMax.to($button, duration, {scaleY: 1.2, ease: Expo.easeOut});
+        TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
+        TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
+    });
+  </script>
+</html>
